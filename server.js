@@ -58,6 +58,48 @@ db.connect(function (error) {
   
     )
   }
+  let allrole = () =>{
+    inquirer.prompt([{
+      type: 'list',
+      name: 'vad',
+      message: 'Would you like to view all roles?',
+      choices: ['yes','no']
+    }]).then((data) => {
+      if(data.vad === 'yes') {
+        db.query('SELECT * FROM Role', function (error,results)  {
+          if(error) {
+            console.log('error, please try again')
+          }
+          else if (results) {
+            console.table(results);
+          }
+        })
+      }
+    }
+  
+    )
+  }
+  let alleng = () =>{
+    inquirer.prompt([{
+      type: 'list',
+      name: 'vad',
+      message: 'Would you like to view all Employees?',
+      choices: ['yes','no']
+    }]).then((data) => {
+      if(data.vad === 'yes') {
+        db.query('SELECT * FROM Employee', function (error,results)  {
+          if(error) {
+            console.log('error, please try again')
+          }
+          else if (results) {
+            console.table(results);
+          }
+        })
+      }
+    }
+  
+    )
+  }
 
 let whatto = () => {
 inquirer.prompt([{
@@ -70,10 +112,11 @@ inquirer.prompt([{
     alldep()
   }
   else if(data.wwyd === 'view all roles'){
-    console.log('2')
+    allrole()
+
   }
   else if(data.wwyd === 'view all employees'){
-    console.log('3')
+    alleng()
   }
 
 
