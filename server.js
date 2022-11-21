@@ -100,13 +100,28 @@ db.connect(function (error) {
   
     )
   }
+  let addemp = () => {
+    inquirer.prompt([{
+      type: 'input',
+      name: 'vad',
+      message: 'Would you like to add a department?',
+    }]).then((data) => {
+    
+    db.query('INSERT INTO Department (name) VALUES (?)', data.vad,(error, 
+    results) => {
+       if (error) return res.json({ error: error });
+       else {
+        console.table(results);
+       }
+  })
+})}
 
 let whatto = () => {
 inquirer.prompt([{
   type:'list',
   name: 'wwyd',
   message: 'What to do?',
-  choices: ['view all departments','view all roles', 'view all employees']
+  choices: ['view all departments','view all roles', 'view all employees','add a role', 'add a department', 'add an employee']
 }]).then((data) =>{
   if(data.wwyd === 'view all departments'){
     alldep()
@@ -117,6 +132,9 @@ inquirer.prompt([{
   }
   else if(data.wwyd === 'view all employees'){
     alleng()
+  }
+  else if(data.wwyd === 'add a department') {
+    addemp()
   }
 
 
