@@ -104,7 +104,7 @@ db.connect(function (error) {
     inquirer.prompt([{
       type: 'input',
       name: 'vad',
-      message: 'Would you like to add a department?',
+      message: 'What is the name of your department?',
     }]).then((data) => {
     
     db.query('INSERT INTO Department (name) VALUES (?)', data.vad,(error, 
@@ -114,6 +114,64 @@ db.connect(function (error) {
         console.table(results);
        }
   })
+})}
+let addw = () => {
+  inquirer.prompt([{
+    type: 'input',
+    name: 'vad',
+    message: 'What Role would you like to add?',
+  },
+  {
+    type: 'input',
+    name: 'vad2',
+    message: 'What is the salary?',
+  },
+  {
+    type: 'input',
+    name: 'vad3',
+    message: 'What is the department id?',
+  }
+]).then((data) => {
+  
+  db.query('INSERT INTO Role (title,salary,department_id) VALUES (?,?,?)', [data.vad,data.vad2,data.vad3],(error, 
+  results) => {
+     if (error) return res.json({ error: error });
+     else {
+      console.table(results);
+     }
+})
+})}
+
+let adde = () => {
+  inquirer.prompt([{
+    type: 'input',
+    name: 'vad',
+    message: 'What is the first name?',
+  },
+  {
+    type: 'input',
+    name: 'vad2',
+    message: 'What is the last name?',
+  },
+  {
+    type: 'input',
+    name: 'vad3',
+    message: 'What is the role id?',
+  },
+  {
+    type: 'input',
+    name: 'vad4',
+    message: 'What is the manager id?',
+  }
+]).then((data) => {
+  
+  db.query('INSERT INTO Employee (first_name,last_name,role_id,manager_id) VALUES (?,?,?,?)', [data.vad,data.vad2,data.vad3,data.vad4],(error, 
+  results) => {
+     if (error) return res.json({ error: error });
+     else {
+      console.table(results);
+     }
+})
 })}
 
 let whatto = () => {
@@ -134,9 +192,11 @@ inquirer.prompt([{
     alleng()
   }
   else if(data.wwyd === 'add a department') {
-    addemp()
+    addemp()}
+  else if(data.wwyd === 'add a role') {
+      addw()
   }
-
-
-
+  else if(data.wwyd === 'add an employee') {
+    adde()
+}
 })}
