@@ -141,7 +141,6 @@ let addw = () => {
      }
 })
 })}
-
 let adde = () => {
   inquirer.prompt([{
     type: 'input',
@@ -174,12 +173,35 @@ let adde = () => {
 })
 })}
 
+
+let uppd = () => {
+  inquirer.prompt([
+  {
+    type: 'input',
+    name: 'vad4',
+    message: 'What is the role?',
+  },{
+    type: 'input',
+    name: 'vad5',
+    message: 'What is the new role',
+  }
+]).then((data) => {
+  
+  db.query('UPDATE `Role` SET `title` = (?) WHERE `title` = (?)', [data.vad5,data.vad4],(error, 
+  results) => {
+     if (error) return res.json({ error: error });
+     else {
+      console.table(results);
+     }
+})
+})}
+
 let whatto = () => {
 inquirer.prompt([{
   type:'list',
   name: 'wwyd',
   message: 'What to do?',
-  choices: ['view all departments','view all roles', 'view all employees','add a role', 'add a department', 'add an employee']
+  choices: ['view all departments','view all roles', 'view all employees','add a role', 'add a department', 'add an employee', 'update role']
 }]).then((data) =>{
   if(data.wwyd === 'view all departments'){
     alldep()
@@ -198,5 +220,8 @@ inquirer.prompt([{
   }
   else if(data.wwyd === 'add an employee') {
     adde()
+}
+else if(data.wwyd === 'update role') {
+  uppd()
 }
 })}
