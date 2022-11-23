@@ -26,10 +26,7 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the CMS_db database.`)
 );
-
-// Create a movie
-
-// Default response for any other request (Not Found)
+// main prompt
 db.connect(function (error) {
   if(error){
     console.log('error found')
@@ -79,6 +76,7 @@ db.connect(function (error) {
   
     )
   }
+  // engineering prompt
   let alleng = () =>{
     inquirer.prompt([{
       type: 'list',
@@ -100,6 +98,7 @@ db.connect(function (error) {
   
     )
   }
+  // department prompt
   let addemp = () => {
     inquirer.prompt([{
       type: 'input',
@@ -115,6 +114,7 @@ db.connect(function (error) {
        }
   })
 })}
+// department add
 let addw = () => {
   inquirer.prompt([{
     type: 'input',
@@ -132,7 +132,7 @@ let addw = () => {
     message: 'What is the department id?',
   }
 ]).then((data) => {
-  
+
   db.query('INSERT INTO Role (title,salary,department_id) VALUES (?,?,?)', [data.vad,data.vad2,data.vad3],(error, 
   results) => {
      if (error) return res.json({ error: error });
@@ -141,6 +141,7 @@ let addw = () => {
      }
 })
 })}
+// add employee
 let adde = () => {
   inquirer.prompt([{
     type: 'input',
@@ -173,7 +174,7 @@ let adde = () => {
 })
 })}
 
-
+// new role
 let uppd = () => {
   inquirer.prompt([
   {
@@ -195,7 +196,8 @@ let uppd = () => {
      }
 })
 })}
-
+// main prompter with options of what to do
+// main prompt that decides what we care supposed to
 let whatto = () => {
 inquirer.prompt([{
   type:'list',

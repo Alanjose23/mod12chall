@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS CMS_db;
 CREATE DATABASE CMS_db;
-
+-- create db and create tables
 USE CMS_db;
 
 CREATE TABLE Department (

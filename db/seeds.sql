@@ -1,4 +1,5 @@
 INSERT INTO Department (name)
+-- insert notes into department
 VALUES ("spinach"),
         ('Creator'),
         ('Finder');
